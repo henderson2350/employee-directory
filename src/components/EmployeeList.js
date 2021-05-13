@@ -2,7 +2,6 @@ import React from "react";
 // import Container from 'Container'
 
 function EmployeeList(props) {
-    console.log(props.employees)
   return (
     <div>
       <table>

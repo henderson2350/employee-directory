@@ -16,16 +16,50 @@ class Container extends Component {
     .then(res => this.setState({ results: res.data.results, filteredResults: res.data.results}))
   }
 
-  filterLastName() {
-    this.state.results.prototype.filter()
+  filterLastName = () => {
+    const sortedEmployees = this.state.results.sort((a, b) => {
+      return a.name.last > b.name.last ? 1 : -1
+    });
+
+    this.setState({filteredResults: sortedEmployees})
   }
 
+  // filterEmployees = (event) => {
+  //   const filteredEmployees = this.state.results.filter(employee => {
+  //     employee.name.last.includes(event.target.value)
+  //   })
+
+  //   console.log(event.target.value)
+
+  //   this.setState({filteredResults: filteredEmployees})
+  // }
+
+  handleSearch = event => {
+    // Getting the value and name of the input which triggered the change
+    const value = event.target.value;
+    const name = event.target.name;
+
+    // Updating the input's state
+    this.setState({
+      [name]: value
+    });
+
+    const filteredEmployees = this.state.results.filter(function (employee) {
+      return employee.name.last.toLowerCase().includes(event.target.value)
+    })
+
+    this.setState({filteredResults: filteredEmployees})
+
+    console.log(filteredEmployees)
+    
+  };
 
   render() {
     return (
       <div>
         <div>Welcome to Employee Directory</div>
-        <SearchForm />
+        <p>Your search is {this.state.search}</p>
+        <SearchForm handleSearch={this.handleSearch}/>
         <button onClick={this.filterLastName}>Sort by last name</button>
         <EmployeeList employees={this.state.filteredResults} />
       </div>
