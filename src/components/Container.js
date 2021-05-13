@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import EmployeeList from "./EmployeeList.js";
 import SearchForm from './SearchForm.js'
 import getEmployees from '../utils/API'
@@ -23,16 +22,6 @@ class Container extends Component {
 
     this.setState({filteredResults: sortedEmployees})
   }
-
-  // filterEmployees = (event) => {
-  //   const filteredEmployees = this.state.results.filter(employee => {
-  //     employee.name.last.includes(event.target.value)
-  //   })
-
-  //   console.log(event.target.value)
-
-  //   this.setState({filteredResults: filteredEmployees})
-  // }
 
   handleSearch = event => {
     // Getting the value and name of the input which triggered the change
